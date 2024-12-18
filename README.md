@@ -10,7 +10,7 @@ Input:
 An image of food (e.g., JPEG/PNG format).  
 
 Output:  
-The predicted food class label (from one of the 101 available classes).  
+The predicted food class label (from one of the 15 available classes).  
 
 Approach:  
 The solution involves training a Convolutional Neural Network (CNN) based on a pretrained ResNet-34 architecture from PyTorch's model zoo. The model is fine-tuned using transfer learning to recognize food categories from the given dataset.  
@@ -40,7 +40,7 @@ The project uses the FOOD-101 dataset containing:
    - Test the model's performance on the provided test set and assess final metrics like accuracy.
 
 5. Tracking:
-   - Use Weights & Biases (WandB) for logging training metrics, validation performance, and saving the best models.
+   - Use Weights & Biases (WandB) for logging training metrics (NOT REALIZED), validation performance, and saving the best models.
 
 ---
 
