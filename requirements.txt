@@ -1,0 +1,8 @@
+torch: Deep learning framework.  
+torchvision: Computer vision tools.  
+numpy: Numerical computation library.  
+matplotlib: Data visualization library.  
+scikit-learn: Machine learning tools.  
+transformers: NLP and transformers library.  
+Pillow (PIL): Image processing library.  
+fastapi: Web API framework.
