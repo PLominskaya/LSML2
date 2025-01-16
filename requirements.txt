@@ -6,3 +6,4 @@ scikit-learn: Machine learning tools.
 transformers: NLP and transformers library.  
 Pillow (PIL): Image processing library.  
 fastapi: Web API framework.
+wandb: for experiment tracking with UI
