@@ -40,7 +40,11 @@ The project uses the FOOD-101 dataset containing:
    - Test the model's performance on the provided test set and assess final metrics like accuracy.
 
 5. Tracking:
-   - Use Weights & Biases (WandB) for logging training metrics (NOT REALIZED), validation performance, and saving the best models.
+   - Use Weights & Biases (WandB) for logging training metrics, validation performance, and saving the best models.
+
+6. Serving:
+   - Use Python API to serve the project.
+   
 
 ---
 
