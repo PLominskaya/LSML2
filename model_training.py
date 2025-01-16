@@ -11,6 +11,7 @@ import torch.optim as optim
 from sklearn.model_selection import train_test_split
 from torchvision import transforms
 from transformers import ViTFeatureExtractor, ViTForImageClassification, TrainingArguments, Trainer
+import wandb
 # 1.1 Load data, visualize data
 # First lets define the transform for the dataset to resize image and convert to tensor
 transform = transforms.Compose([
@@ -77,6 +78,12 @@ model.fc = nn.Linear(num_ftrs, len(selected_classes))
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 model = model.to(device)
 
+# Log in Wandb with token of your account
+wandb.login(key="YOUR TOKEN")
+
+# Initialize WandB
+wandb.init(project="FOOD101_project", name="non_optimized")
+
 # Data loaders
 train_loader = DataLoader(train_set, batch_size=32, shuffle=True)
 val_loader = DataLoader(val_set, batch_size=32, shuffle=False)
@@ -99,7 +106,8 @@ for epoch in range(num_epochs):
         loss.backward()
         optimizer.step()
         running_loss += loss.item()
-
+    # Log train process to Wandb
+    wandb.log({"train_loss": running_loss / len(train_loader), "epoch": epoch})
     model.eval()
     val_loss = 0.0
     correct = 0
@@ -113,8 +121,14 @@ for epoch in range(num_epochs):
             _, predicted = torch.max(outputs, 1)
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
+    # Log validation process to Wandb
+    wandb.log({"val_loss": val_loss / len(val_loader), 
+                "val_accuracy": correct / total,
+                "epoch": epoch})
 
     print(f'Epoch {epoch+1}/{num_epochs}, '
           f'Train Loss: {running_loss / len(train_loader):.4f}, '
           f'Validation Loss: {val_loss / len(val_loader):.4f}, '
           f'Validation Accuracy: {correct / total:.4f}')
+# Close WandB connection
+wandb.finish()
